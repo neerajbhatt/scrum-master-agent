@@ -59,5 +59,6 @@ logs/
 generate_lld_doc.py
 generate_architecture_diagram.py
 
-# Generated Word docs (large binaries — regenerate with scripts)
+# Generated Word docs — excluded everywhere except docs/
 *.docx
+!docs/*.docx
