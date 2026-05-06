@@ -1,0 +1,90 @@
+import { Sprint, BurndownDataPoint, VelocityDataPoint } from "../types";
+
+export const currentSprint: Sprint = {
+  id: "s24",
+  name: "Sprint 24",
+  startDate: "2026-04-27",
+  endDate: "2026-05-10",
+  status: "active",
+  totalPoints: 55,
+  completedPoints: 34,
+  committedItems: 18,
+  completedItems: 11,
+  carryoverItems: 3,
+};
+
+export const recentSprints: Sprint[] = [
+  {
+    id: "s20",
+    name: "Sprint 20",
+    startDate: "2026-03-02",
+    endDate: "2026-03-15",
+    status: "completed",
+    totalPoints: 50,
+    completedPoints: 42,
+    committedItems: 16,
+    completedItems: 13,
+    carryoverItems: 3,
+  },
+  {
+    id: "s21",
+    name: "Sprint 21",
+    startDate: "2026-03-16",
+    endDate: "2026-03-29",
+    status: "completed",
+    totalPoints: 48,
+    completedPoints: 48,
+    committedItems: 15,
+    completedItems: 15,
+    carryoverItems: 0,
+  },
+  {
+    id: "s22",
+    name: "Sprint 22",
+    startDate: "2026-03-30",
+    endDate: "2026-04-12",
+    status: "completed",
+    totalPoints: 52,
+    completedPoints: 45,
+    committedItems: 17,
+    completedItems: 14,
+    carryoverItems: 3,
+  },
+  {
+    id: "s23",
+    name: "Sprint 23",
+    startDate: "2026-04-13",
+    endDate: "2026-04-26",
+    status: "completed",
+    totalPoints: 55,
+    completedPoints: 50,
+    committedItems: 18,
+    completedItems: 16,
+    carryoverItems: 2,
+  },
+  currentSprint,
+];
+
+export const burndownData: BurndownDataPoint[] = [
+  { day: "Day 1", ideal: 55, actual: 55 },
+  { day: "Day 2", ideal: 50.4, actual: 52 },
+  { day: "Day 3", ideal: 45.8, actual: 49 },
+  { day: "Day 4", ideal: 41.3, actual: 45 },
+  { day: "Day 5", ideal: 36.7, actual: 42 },
+  { day: "Day 6", ideal: 32.1, actual: 38 },
+  { day: "Day 7", ideal: 27.5, actual: 34 },
+  { day: "Day 8", ideal: 22.9, actual: 28 },
+  { day: "Day 9", ideal: 18.3, actual: 21 },
+  { day: "Day 10", ideal: 13.8, actual: 0 },
+  { day: "Day 11", ideal: 9.2, actual: 0 },
+  { day: "Day 12", ideal: 4.6, actual: 0 },
+  { day: "Day 13", ideal: 0, actual: 0 },
+];
+
+export const velocityData: VelocityDataPoint[] = [
+  { sprint: "Sprint 20", committed: 50, completed: 42 },
+  { sprint: "Sprint 21", committed: 48, completed: 48 },
+  { sprint: "Sprint 22", committed: 52, completed: 45 },
+  { sprint: "Sprint 23", committed: 55, completed: 50 },
+  { sprint: "Sprint 24", committed: 55, completed: 34 },
+];
