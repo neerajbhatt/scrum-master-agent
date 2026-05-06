@@ -1,9 +1,12 @@
 services:
   - type: web
     name: scrum-master-agent
-    runtime: static
+    runtime: node
     buildCommand: npm install && npm run build
-    staticPublishPath: ./out
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
     routes:
       - type: rewrite
         source: /*
