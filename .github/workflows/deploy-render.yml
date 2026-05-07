@@ -1,13 +1,10 @@
-name: Build & Deploy to Render
+name: CI & Deploy
 
 on:
   push:
     branches: [master]
   pull_request:
     branches: [master]
-  # Keep alive — runs every 14 minutes to prevent Render free-tier spin-down
-  schedule:
-    - cron: "*/14 * * * *"
 
 jobs:
   build:
@@ -45,22 +42,4 @@ jobs:
         run: |
           curl -s -o /dev/null -w "%{http_code}" \
             -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" \
-            | grep -q "200\|201" && echo "Deploy triggered successfully" || echo "Deploy hook responded"
-
-  keep-alive:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'
-    steps:
-      - name: Ping Render to prevent spin-down
-        run: |
-          SITE_URL="${{ secrets.RENDER_SITE_URL }}"
-          if [ -z "$SITE_URL" ]; then
-            SITE_URL="https://scrum-master-agent-portal.onrender.com"
-          fi
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SITE_URL")
-          echo "Ping response: $STATUS"
-          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
-            echo "Site is up"
-          else
-            echo "Site returned $STATUS — may need attention"
-          fi
+            | grep -q "200\|201" && echo "Deploy triggered" || echo "Deploy hook responded"

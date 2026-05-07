@@ -1,0 +1,38 @@
+name: Keep Alive
+
+# Ping every 5 minutes to prevent Render free-tier spin-down (spins down after 15 min of inactivity)
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch: # Allow manual trigger
+
+env:
+  SITE_URL: https://scrum-master-agent-portal.onrender.com
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping site
+        run: |
+          URL="${{ secrets.RENDER_SITE_URL || env.SITE_URL }}"
+          echo "Pinging $URL ..."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$URL")
+          echo "Status: $STATUS"
+
+      - name: Ping /blockers
+        run: |
+          URL="${{ secrets.RENDER_SITE_URL || env.SITE_URL }}"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$URL/blockers")
+          echo "/blockers: $STATUS"
+
+      - name: Ping /healthz
+        run: |
+          URL="${{ secrets.RENDER_SITE_URL || env.SITE_URL }}"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$URL/healthz")
+          echo "/healthz: $STATUS"
+
+      - name: Alert on failure
+        if: failure()
+        run: |
+          echo "::warning::Site may be down! Check https://dashboard.render.com"
