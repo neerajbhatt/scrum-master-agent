@@ -55,7 +55,7 @@ jobs:
         run: |
           SITE_URL="${{ secrets.RENDER_SITE_URL }}"
           if [ -z "$SITE_URL" ]; then
-            SITE_URL="https://scrum-master-agent.onrender.com"
+            SITE_URL="https://scrum-master-agent-portal.onrender.com"
           fi
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SITE_URL")
           echo "Ping response: $STATUS"
